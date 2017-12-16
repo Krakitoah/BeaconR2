@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BeaconProtoType"
+             x:Class="BeaconProtoType.MainPage">
+
+    <StackLayout>
+        <Label 
+            Text="Welcome to Beacon Login, Please Input Your First Name" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center">
+        </Label>
+        <TableView Intent="Data">
+            <TableRoot>
+                <TableSection Title="Login">
+                    <EntryCell x:Name="Name" Completed="EntryCell_Completed">
+                    </EntryCell>
+                </TableSection>
+                
+            </TableRoot>
+            
+        </TableView>
+        
+    </StackLayout>
+    
+</ContentPage>

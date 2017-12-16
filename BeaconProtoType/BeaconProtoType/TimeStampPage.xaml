@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BeaconProtoType.TimeStampPage">
+
+    <StackLayout>
+        <Button x:Name="TimeIn" Text="Time In" Clicked="TimeIn_Clicked"></Button>
+        <Button x:Name="TimeOut" Text="Time Out" Clicked="TimeOut_Clicked"></Button>
+        <Button x:Name="ConvertToEmail" Text="Convert To Email" Clicked="Convert_Clicked"></Button>
+        <Button x:Name="ClearDatabase" Text="Clear Database" Clicked="ClearDatabase_Clicked"></Button>
+        <Button x:Name="ScanForBluetooth" Text="ScanForBlueTooth" Clicked="ScanForBluetooth_Clicked"></Button>
+        <StackLayout Orientation="Horizontal">
+            <ListView x:Name="TimeInList" HorizontalOptions="Start" ItemSelected="TimeInList_ItemSelected">
+            </ListView>
+            <ListView x:Name="TimeOutList" HorizontalOptions="End" ItemSelected="TimeOutList_ItemSelected">
+            </ListView>
+    </StackLayout>
+    </StackLayout>
+</ContentPage>
