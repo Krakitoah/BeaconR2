@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -15,6 +14,7 @@ using Java.IO;
 using Xamarin.Forms;
 using BeaconProtoType.Droid;
 using Plugin.Messaging;
+using System.ComponentModel;
 
 [assembly: Dependency(typeof(SaveAndroid))]
 namespace BeaconProtoType.Droid
@@ -57,7 +57,7 @@ namespace BeaconProtoType.Droid
                 if (emailMessanger.CanSendEmail)
                 {
                     var email = new EmailMessageBuilder()
-                    .To("PapaQuackers@gmail.com")
+                    .To("At0912@gmail.com")
                     .Subject("Punches")
                     .Body("Test Run")
                     .WithAttachment(file)

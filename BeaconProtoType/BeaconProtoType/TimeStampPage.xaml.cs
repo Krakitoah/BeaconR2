@@ -27,9 +27,10 @@ namespace BeaconProtoType
         public ObservableCollection<TimeInPunches> myTimeIns;
         public ObservableCollection<TimeInPunches> myTimeOuts;
         public ObservableCollection<IDevice> myDevices;
+        public ObservableCollection<String> deviceNames;
         private SQLiteAsyncConnection connection;
         private BluetoothAdapter mBluetoothAdapter;
-        public int rssi;
+        public float rssi;
 
 
         public TimeStampPage()
@@ -50,10 +51,11 @@ namespace BeaconProtoType
             myTimeIns = new ObservableCollection<TimeInPunches>(myTimes);
             myTimeOuts = new ObservableCollection<TimeInPunches>(myTimes);
             myDevices = new ObservableCollection<IDevice>();
+            deviceNames = new ObservableCollection<string>();
 
             TimeInList.ItemsSource = myTimeIns;
 
-            TimeOutList.ItemsSource = myDevices;
+            DeviceList.ItemsSource = deviceNames;
 
             if (!mBluetoothAdapter.IsEnabled)
             {
@@ -120,22 +122,24 @@ namespace BeaconProtoType
                 IWorksheet worksheet = workbook.Worksheets[0];
 
 
-                worksheet["A1"].Text = "User";
-                worksheet["B1"].Text = "PhoneID";
-                worksheet["C1"].Text = "TimeIn";
-                worksheet["D1"].Text = "TimeOut";
-                worksheet["E1"].Text = "BeaconID";
-                worksheet["F1"].Text = "SignalStrength";
+                //worksheet["A1"].Text = "User";
+                //worksheet["B1"].Text = "PhoneID";
+                //worksheet["C1"].Text = "TimeIn";
+                //worksheet["D1"].Text = "TimeOut";
+                //worksheet["E1"].Text = "BeaconID";
+                //worksheet["F1"].Text = "SignalStrength";
 
 
-                for (int i = 0; i < myTimeIns.Count; i++)
+                for (int i = 0; i < deviceNames.Count; i++)
                 {
-                    worksheet["A" + Convert.ToString(i + 2)].Text = myTimeIns[i].UserName;
-                    worksheet["B" + Convert.ToString(i + 2)].Text = myTimeIns[i].PhoneID;
-                    worksheet["C" + Convert.ToString(i + 2)].Text = myTimeIns[i].TimeIn.ToString();
-                    worksheet["D" + Convert.ToString(i + 2)].Text = myTimeIns[i].TimeOut.ToString();
-                    worksheet["E" + Convert.ToString(i + 2)].Text = myTimeIns[i].BeaconID;
-                    worksheet["F" + Convert.ToString(i + 2)].Text = myTimeIns[i].SignalStrength;
+                    //worksheet["A" + Convert.ToString(i + 2)].Text = myTimeIns[i].UserName;
+                    //worksheet["B" + Convert.ToString(i + 2)].Text = myTimeIns[i].PhoneID;
+                    //worksheet["C" + Convert.ToString(i + 2)].Text = myTimeIns[i].TimeIn.ToString();
+                    //worksheet["D" + Convert.ToString(i + 2)].Text = myTimeIns[i].TimeOut.ToString();
+                    //worksheet["E" + Convert.ToString(i + 2)].Text = myTimeIns[i].BeaconID;
+                    //worksheet["F" + Convert.ToString(i + 2)].Text = myTimeIns[i].SignalStrength;
+                    worksheet["A" + Convert.ToString(i + 3)].Text = deviceNames[i];
+
 
                 }
 
@@ -174,18 +178,17 @@ namespace BeaconProtoType
         {
             CrossBleAdapter.Current.Scan().Subscribe(scanResult =>
             {
-                
-                if (!myDevices.Contains(scanResult.Device) && !string.IsNullOrWhiteSpace(scanResult.Device.Name))
+                if (!string.IsNullOrWhiteSpace(scanResult.Device.Name) && !scanResult.Device.Name.Contains("Alta") && scanResult.Rssi >= -60)
                 {
-                    scanResult.Device.PairingRequest();
+                    deviceNames.Add(String.Format("{0} - RSSI: {1} Time: {2}", scanResult.Device.Name, scanResult.Rssi, DateTime.Now));
                 }
             });
         }
 
         private async void TimeOutList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var mySelection = e.SelectedItem as IDevice;
-            await DisplayAlert(Convert.ToString(rssi), mySelection.Name, "ok");
+            var mySelection = e.SelectedItem as string;
+            await DisplayAlert(mySelection, mySelection, "ok");
         }
     }
 }

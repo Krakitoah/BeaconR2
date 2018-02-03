@@ -12,7 +12,7 @@
         <StackLayout Orientation="Horizontal">
             <ListView x:Name="TimeInList" HorizontalOptions="Start" ItemSelected="TimeInList_ItemSelected">
             </ListView>
-            <ListView x:Name="TimeOutList" HorizontalOptions="End" ItemSelected="TimeOutList_ItemSelected">
+            <ListView x:Name="DeviceList" HorizontalOptions="End" ItemSelected="TimeOutList_ItemSelected">
             </ListView>
     </StackLayout>
     </StackLayout>

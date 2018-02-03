@@ -2,7 +2,7 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Plugin.BluetoothLE": "5.1.0",
-    "Xamarin.Forms": "2.4.0.280"
+    "Xamarin.Forms": "2.5.0.122203"
   },
   "frameworks": {
     "uap10.0.10586": {}
